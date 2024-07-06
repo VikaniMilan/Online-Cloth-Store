@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<title>Page Title</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+<style>
+</style>
+<script src=""></script>
+<body>
+
+    <form method = 'POST'>
+        {% csrf_token %}
+        <label><b>Company ID : </b></label>
+        <input type='text' placeholder='Enter Company ID' name = 'cid'>
+        <br>
+        <br>
+        <label><b>Password : </b></label>
+        <input type='Password' placeholder='Enter Password' name = 'pwd'>
+        <br>
+        <br>
+        <button type="submit" value="Submit">Login</button>
+        <br>
+        <br>
+        <p>If, You have no registered to website as retailer, </p> <a href = "{% url 'retailerregistration' %}">Register.</a>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+{% include "header.html" %}
+
+<!-- Breadcrumb Start -->
+        <div class="breadcrumb-wrap">
+            <div class="container">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#">User</a></li>
+                    <li class="breadcrumb-item active">Login</li>
+                </ul>
+            </div>
+        </div>
+        <!-- Breadcrumb End -->
+    
+        <!-- Login Start -->
+        <div class="login">
+            <div class="container">
+                <div class="section-header">
+                    <h3>Login</h3>
+                </div>
+                <b>
+                    <div class="section-header">
+                    </div>
+                <div class="row">
+                    <div class="mx-auto col-10 col-md-8 col-lg-6">
+                        <div class="login-form">
+                            <div class="row">
+                                <div class="mx-auto col-10 col-md-8 col-lg-6">
+                                    <form action = "login" method = "POST">
+                                        {% csrf_token %}
+                                    <label><b>Username</b></label>
+                                    <br>
+                                    {{ login_form.username }}
+                                </div>
+                                <br>
+                                <div class="mx-auto col-10 col-md-8 col-lg-6">
+                                    <label><b>Password</b></label>
+                                    {{ login_form.password }}
+                                </div>
+                                </div> 
+                                <br>
+                                <div class="mx-auto col-10 col-md-10 col-lg-5">  
+                                    <button class="btn">Submit</button>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </b>
+        </div>
+        <!-- Login End -->
+    
+{% include "footer.html" %}

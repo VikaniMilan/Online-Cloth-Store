@@ -1,0 +1,31 @@
+{% include "header.html" %}
+
+<!-- Login Start -->
+<div class="login">
+    <div class="container">
+        <div class="section-header">
+            <h3>Add image which is New Arrival</h3>
+        </div>
+        <b>
+        <div class="row">
+            <div class="mx-auto col-10 col-md-8 col-lg-6">
+                <div class="login-form">
+                    <div class="row">
+                        <form action="newarrivalimg" method="POST">
+                            {% csrf_token %}
+                        <div class="col-md-6">
+                            <label><b>Upload Image : </b></label>
+                            <input class="file-upload-input" type="file" name="newarrivalimg">
+                        </div>
+                        <div class="col-md-12">
+                            <button class="btn">Submit</button>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</b>
+</div>
+{% include "footer.html" %}

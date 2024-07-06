@@ -1,0 +1,117 @@
+{% include "header.html" %}
+
+        <div class="my-account">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active" id="dashboard-nav" data-toggle="pill" href="#dashboard-tab" role="tab">Dashboard</a>
+                            <a class="nav-link" id="orders-nav" data-toggle="pill" href="#orders-tab" role="tab">Orders</a>
+                            <a class="nav-link" id="address-nav" data-toggle="pill" href="#address-tab"  role="tab">Address(s)</a>
+                            <a class="nav-link" id="account-nav" data-toggle="pill" href="#account-tab" role="tab">Add Address</a>
+                            <a class="nav-link" href="logout">Logout</a>
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="tab-content">
+                            <div class="tab-pane fade show active" id="dashboard-tab" role="tabpanel" aria-labelledby="dashboard-nav">
+                                <h4>Dashboard</h4>
+                                <p>
+                                    Hii, {{ request.user.first_name }} We're super excited to see you join the R & S community. We hope you will be happy with our products and that you will shop with us again and again. Our goal is to offer the widest range of at the highest quality.
+                                </p> 
+                            </div>
+                            <div class="tab-pane fade" id="orders-tab" role="tabpanel" aria-labelledby="orders-nav">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th>Order_id</th>
+                                                <th>Product</th>
+                                                <th>Date</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for order in orders %}
+                                            {% for order_item in order_data %}
+                                            {% for prd in product %}
+                                            {% if order.id == order_item.Order_id_id and order_item.Product_id_id == prd.id %}
+                                            <tr>
+                                                <td>{{order.id}}</td>
+                                                <td>{{prd.name}}</td>
+                                                <td>{{order.order_date}}</td>
+                                                <td>{{prd.price}}</td>
+                                            </tr>
+                                            {% endif %}
+                                            {% endfor %}
+                                            {% endfor %}
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="address-tab" role="tabpanel" aria-labelledby="address-nav">
+            
+                                <div class="row">
+                                    {% for addr in address %}
+                                    {% if addr.username_id == request.user.id %}
+                                    <div class="col-md-6">
+                                        <h5><b>Shipping Address</b></h5>
+                                        <p>{{addr.AddressLine1}}</p>
+                                        <p>{{addr.AddressLine2}}</p>
+                                        <p>{{addr.City}}, {{addr.State}}</p>
+                                        <p>Pincode : {{addr.PinCode}}</p>
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="account-tab" role="tabpanel" aria-labelledby="account-nav">
+                                <h4>Add Address</h4>
+                              <form action = "addAddress" method = "POST">  
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" placeholder="First Name" name = "firstname">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" placeholder="Last Name" name = "lastname">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="Address1" name = "address1">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" placeholder="Address2" name = "address2">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" placeholder="City" name = "city">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" placeholder="District" name = "district">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" placeholder="State" name = "state">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="Number" placeholder="Pincode" name = "pincode">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input type="text" placeholder="Mobile" name="mobile">
+                                    </div>
+                                    
+                                    <div class="col-md-12">
+                                        <button>Add Address</button>
+                                        <br><br>
+                                    </div>
+                                </div>
+                            </form>
+        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+{% include "footer.html" %}

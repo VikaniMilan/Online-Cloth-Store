@@ -1,0 +1,88 @@
+{% include "header.html" %}
+
+{% if user.is_authenticated %} 
+
+<style>
+    a {text-align: center;}
+    p {text-align: center;}
+    div {text-align: center;}
+</style>
+
+    <!-- Cart Start -->
+    <div class="cart-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead class="thead-dark">
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Price</th>
+                                    <th>Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody class="align-middle">
+                                {% for obj in list %}
+                                {% for obj1 in product_list %}
+                                {% if obj.customer_id == request.user.id %}
+                                {% if obj.product_id == obj1.id %}
+                                <tr>
+                                    <td>
+                                        <img src="{{obj1.image.url}}" alt="Image"></a>
+                                    </td>
+                                    <td>{{obj1.name}}</td>
+                                    <td>{{obj1.price}}</td>
+
+                                    <form action = 'usercart/remove' method = 'POST'>
+                                    {% csrf_token %}
+                                    <input type = "hidden" name = "cartid" value="{{obj.id}}">
+                                    <td><button type = "submit"><i class="fa fa-trash"></i></button></td>
+                                </tr>
+                                {% endif %}
+                                {% endif %}
+                                {% endfor %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="cart-summary">
+                        <div class="cart-content">
+                            <h3></h3>
+                            <p>Sub Total<span>{{bill}}</span></p>
+                            <p>Shipping Cost<span>40</span></p>
+                            <p>Shipping Cost Discount<span>40</span></p>
+                            <h4>Grand Total<span>{{bill}}</span></h4>
+                        </div>
+                        <div class="cart-btn">
+                            {% comment %} <form action = 'usercart/order' method = 'POST'>
+                                {% csrf_token %}
+                                <input type = "hidden" name = "cartid" value="1">
+                                <button type = "submit">Checkout</button>
+                            </form> {% endcomment %}
+                            <br>
+                            <br>
+                            <h3><a href = "{% url 'order' bill %}" >Checkout  </a></h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Cart End -->
+    {% else %}
+        <script>
+            if (confirm("Click ok for login your account") )  
+            {
+                window.location = "login";
+            }
+
+        </script>
+        {% endif %}
+
+{% include "footer.html" %}
